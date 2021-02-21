@@ -1,2 +1,2 @@
 # poppy-engine
-A c++ 3D engine
+A C++ 3D engine
