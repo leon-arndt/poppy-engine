@@ -10,9 +10,24 @@ int main(int argc, char* argv[]){
         std::cerr << "Initialization failed" << std::endl;
     }
 
-    auto window = glfwCreateWindow(640, 480, "poppy", nullptr, nullptr);
+    auto window = glfwCreateWindow(320, 240, "test", nullptr, nullptr);
+    glfwMakeContextCurrent(window);
+
+    while (!glfwWindowShouldClose(window))
+    {
+        float ratio;
+        int width, height;
+
+        glfwGetFramebufferSize(window, &width, &height);
+        ratio = width / (float) height;
+ 
+        glViewport(0, 0, width, height);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glfwSwapBuffers(window);
+    }
+
     
-    sleep(10);
+    sleep(5);
 
     glfwTerminate();
 }
