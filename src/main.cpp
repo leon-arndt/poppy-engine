@@ -4,6 +4,7 @@
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
 #include <unistd.h>
+#include "../vendor/entt.h"
 
 int main(int argc, char* argv[]){
     if(!glfwInit()){
@@ -26,7 +27,6 @@ int main(int argc, char* argv[]){
         glfwSwapBuffers(window);
     }
 
-    
     sleep(5);
 
     glfwTerminate();

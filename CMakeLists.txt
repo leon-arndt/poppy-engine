@@ -10,7 +10,7 @@ set(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(SOURCES 
     ${SRC_DIR})
 
-add_executable(${PROJECT_NAME} ${SRC_DIR}/main.cpp)
+add_executable(${PROJECT_NAME} ${SRC_DIR}/main.cpp src/player.cpp vendor/entt.h src/player.h)
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(${PROJECT_NAME}
     PRIVATE ${SRC_DIR})
