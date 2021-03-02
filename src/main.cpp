@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <unistd.h>
 #include "../vendor/entt.h"
+#include "transform.h"
 
 int main(int argc, char* argv[]){
     if(!glfwInit()){
@@ -25,6 +26,7 @@ int main(int argc, char* argv[]){
         glViewport(0, 0, width, height);
         glClear(GL_COLOR_BUFFER_BIT);
         glfwSwapBuffers(window);
+        Transform transform;
     }
 
     sleep(5);
