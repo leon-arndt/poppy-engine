@@ -13,7 +13,10 @@ set(SOURCES
 add_executable(${PROJECT_NAME} ${SRC_DIR}/main.cpp vendor/entt.h src/transform.h src/transform.cpp)
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(${PROJECT_NAME}
-    PRIVATE ${SRC_DIR})
+    PRIVATE
+    ${SRC_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/glm
+    )
 
 find_package(glfw3 3.2 REQUIRED)
 target_link_libraries(${PROJECT_NAME} glfw)
