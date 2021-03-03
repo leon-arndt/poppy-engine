@@ -5,7 +5,6 @@
 #include <GLFW/glfw3.h>
 #include <unistd.h>
 #include "../vendor/entt.h"
-#include "transform.h"
 
 int main(int argc, char* argv[]){
     if(!glfwInit()){
@@ -14,6 +13,8 @@ int main(int argc, char* argv[]){
 
     auto window = glfwCreateWindow(320, 240, "test", nullptr, nullptr);
     glfwMakeContextCurrent(window);
+
+    entt::registry registry;
 
     while (!glfwWindowShouldClose(window))
     {
