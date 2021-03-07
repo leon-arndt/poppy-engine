@@ -6,6 +6,7 @@
 #include "glm/vec4.hpp"
 #include <vector>
 #include <unordered_map>
+#include <string>
 
 class render_resource_manager
 {
