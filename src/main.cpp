@@ -3,14 +3,14 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include <unistd.h>
+#include <imgui.h>
+#include <examples/imgui_impl_glfw.h>
+#include <examples/imgui_impl_opengl3.h>
 
 #include "../vendor/entt.h"
-#include "transform.h"
 #include "../glad/glad.h"
-
-#include "renderer/model.h"
-#include "renderer/resource_manager.h"
 #include "util/error.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    auto window = glfwCreateWindow(320, 240, "test", nullptr, nullptr);
+    auto window = glfwCreateWindow(320, 240, "glfw Window", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     glfwSetWindowCloseCallback(window, [](GLFWwindow *window) { glfwSetWindowShouldClose(window, 1); });
     if (!gladLoadGL())
@@ -40,37 +40,55 @@ int main(int argc, char *argv[])
                           &unusedIds,
                           true);
 
-    entt::registry registry;
 
-    render_resource_manager res;
-    res.load_shader("forward", "../resources/shader/forward.vert", "../resources/shader/forward.frag");
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui::GetIO().Fonts->AddFontDefault();
+    ImGui::GetIO().Fonts->Build();
 
-    model::Model mdl = model::load("bla");
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    ImVec2 vec;
+    vec.x = 160;
+    vec.y = 90;
+    io.DisplaySize = vec;
 
-    const auto shader = res.get_shader("forward");
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 130");
 
     while (!glfwWindowShouldClose(window))
     {
-        float ratio;
-        int width, height;
-
-        glUseProgram(shader);
-
-        glfwGetFramebufferSize(window, &width, &height);
-        ratio = width / (float)height;
-
-        glViewport(0, 0, width, height);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glBindVertexArray(mdl.vao.vao);
-        glDrawElements(GL_TRIANGLES, mdl.vao.size, GL_UNSIGNED_INT, nullptr);
-        glBindVertexArray(0);
-
-        glfwSwapBuffers(window);
         glfwPollEvents();
 
-        //Transform transform;
+        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // feed inputs to dear imgui, start new frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        //draw geometry here
+
+        // render your GUI
+        ImGui::Begin("imGUi window");
+        ImGui::Button("Hello Lukas!");
+        ImGui::End();
+
+        // Render dear imgui into screen
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        int display_w, display_h;
+        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
+        glfwSwapBuffers(window);
     }
 
-    glfwTerminate();
+    //clean up
+    ImGui::DestroyContext();
+    glfwDestroyWindow(window);
+
+    return 0;
 }

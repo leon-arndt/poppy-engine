@@ -73,6 +73,8 @@ bool render_resource_manager::load_shader(const std::string &name, const std::st
     {
         std::cerr << "Encountered exception while loading shaders" << std::endl;
     }
+
+    return false;
 }
 
 GLuint render_resource_manager::get_shader(const std::string &name)
