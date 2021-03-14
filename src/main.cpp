@@ -6,9 +6,9 @@
 #include <GLFW/glfw3.h>
 #include <unistd.h>
 #include "../vendor/entt.h"
-#include "../vendor/imgui-1.79/imgui.h"
-#include "../vendor/imgui-1.79/examples/imgui_impl_opengl3.h"
-#include "../vendor/imgui-1.79/examples/imgui_impl_glfw.h"
+#include "../imgui/imgui.h"
+#include "../imgui/examples/imgui_impl_opengl3.h"
+#include "../imgui/examples/imgui_impl_glfw.h"
 
 struct position {
     float x;
