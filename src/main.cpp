@@ -9,8 +9,6 @@
 #include "../vendor/entt.h"
 #include "../glad/glad.h"
 
-
-
 int main(int argc, char *argv[])
 {
     if (!glfwInit())
@@ -69,7 +67,7 @@ int main(int argc, char *argv[])
 
         // render your GUI
         ImGui::Begin("imGUi window");
-        ImGui::Button("Hello!");
+        ImGui::Button("Hello Lukas!");
         ImGui::End();
 
         // Render dear imgui into screen
