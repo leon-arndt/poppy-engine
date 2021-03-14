@@ -1,109 +1,85 @@
 #define GLFW_INCLUDE_NONE
-#define IMGUI_IMPL_OPENGL_LOADER_GLAD
 
 #include <iostream>
-#include <GL/gl.h>
 #include <GLFW/glfw3.h>
-#include <unistd.h>
+#include <imgui.h>
+#include <examples/imgui_impl_glfw.h>
+#include <examples/imgui_impl_opengl3.h>
+
 #include "../vendor/entt.h"
-#include "../imgui/imgui.h"
-#include "../imgui/examples/imgui_impl_opengl3.h"
-#include "../imgui/examples/imgui_impl_glfw.h"
+#include "../glad/glad.h"
 
-struct position {
-    float x;
-    float y;
-};
 
-struct velocity {
-    float dx;
-    float dy;
-};
 
-ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-void update(entt::registry &registry) {
-    printf("Update entt registry");
-    auto view = registry.view<const position, velocity>();
-
-    // use a callback
-    view.each([](const auto &pos, auto &vel) { /* ... */ });
-
-    // use an extended callback
-    view.each([](const auto entity, const auto &pos, auto &vel) { /* ... */ });
-
-    // use a range-for
-    for(auto [entity, pos, vel]: view.each()) {
-        // ...
-    }
-
-    // use forward iterators and get only the components of interest
-    for(auto entity: view) {
-        auto &vel = view.get<velocity>(entity);
-        // ...
-    }
-}
-
-int main(int argc, char* argv[]){
-    if(!glfwInit()){
+int main(int argc, char *argv[])
+{
+    if (!glfwInit())
+    {
         std::cerr << "Initialization failed" << std::endl;
     }
 
-    auto window = glfwCreateWindow(320, 240, "glfw/imGui Test", nullptr, nullptr);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    auto window = glfwCreateWindow(320, 240, "glfw Window", nullptr, nullptr);
     glfwMakeContextCurrent(window);
+    glfwSetWindowCloseCallback(window, [](GLFWwindow *window) { glfwSetWindowShouldClose(window, 1); });
+    if (!gladLoadGL())
+    {
+        std::cerr << "Failed to initialize GL" << std::endl;
+    }
 
-    entt::registry registry;
+    glEnable(GL_DEBUG_OUTPUT);
+    glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+    GLuint unusedIds = 0;
+    glDebugMessageControl(GL_DONT_CARE,
+                          GL_DONT_CARE,
+                          GL_DONT_CARE,
+                          0,
+                          &unusedIds,
+                          true);
 
-    //ImGui_ImplGlfw_InitForOpenGL(window, true);
-    // ImGui_ImplOpenGL3_Init(glsl_version);
-
-    //state
-    bool my_tool_active = true;
+    IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
+    ImGui::GetIO().Fonts->AddFontDefault();
+    ImGui::GetIO().Fonts->Build();
+
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    ImVec2 vec;
+    vec.x = 160;
+    vec.y = 90;
+    io.DisplaySize = vec;
+
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 130");
 
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-
-        /*
-        float ratio;
-        int width, height;
-
-        glfwGetFramebufferSize(window, &width, &height);
-        ratio = width / (float) height;
-
-        glViewport(0, 0, width, height);
+        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
         glClear(GL_COLOR_BUFFER_BIT);
-         */
-        ImGui::NewFrame();
-        ImGui::Begin("My First ImGui Tool", &my_tool_active, ImGuiWindowFlags_MenuBar);
-        ImGui::End();
-        glfwSwapBuffers(window);
 
-        // Rendering
+        // feed inputs to dear imgui, start new frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        //draw geometry here
+
+        // render your GUI
+        ImGui::Begin("imGUi window");
+        ImGui::Button("Hello!");
+        ImGui::End();
+
+        // Render dear imgui into screen
         ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
-        glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-        glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-        ImGui::StyleColorsDark();
         glfwSwapBuffers(window);
-
-        /*
-        //entt registry updates
-        for (int i = 0; i < 10; i++) {
-            const auto entity = registry.create();
-            registry.emplace<position>(entity, i * 1.f, i * 1.f);
-            if(i % 2 == 0) {
-                registry.emplace<velocity>(entity, i * .1f, i * .1f);
-            }
-            update(registry);
-        }
-        */
     }
 
     //clean up
