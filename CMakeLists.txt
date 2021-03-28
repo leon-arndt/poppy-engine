@@ -50,8 +50,9 @@ file(
     src/renderer/model.cpp
     src/renderer/hardware_resources.cpp
     src/renderer/resource_manager.cpp
-        imgui/glad/glad.h
-        imgui/glad/glad.c
+    src/entities/entt_manager.cpp
+    imgui/glad/glad.h
+    imgui/glad/glad.c
     ${ImGuiSources}
         )
 

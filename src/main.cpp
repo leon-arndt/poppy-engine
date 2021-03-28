@@ -10,10 +10,12 @@
 #include "../vendor/entt.h"
 #include "../glad/glad.h"
 #include "util/error.h"
-
+#include "entities/entt_manager.h"
 
 int main(int argc, char *argv[])
 {
+    entt_manager::init();
+
     if (!glfwInit())
     {
         std::cerr << "Initialization failed" << std::endl;
