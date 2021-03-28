@@ -10,6 +10,7 @@
 #include "../vendor/entt.h"
 #include "../glad/glad.h"
 #include "util/error.h"
+#include "entt/entt_manager.h"
 
 
 int main(int argc, char *argv[])
@@ -18,6 +19,8 @@ int main(int argc, char *argv[])
     {
         std::cerr << "Initialization failed" << std::endl;
     }
+
+    entt_manager::init();
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);

@@ -47,6 +47,7 @@ file(
     imgui/examples/imgui_impl_glfw.cpp
     src/transform.h
     src/transform.cpp
+    src/entt/entt_manager.cpp
     src/renderer/model.cpp
     src/renderer/hardware_resources.cpp
     src/renderer/resource_manager.cpp
