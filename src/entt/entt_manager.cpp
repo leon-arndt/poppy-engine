@@ -1,6 +1,7 @@
 #include "entt_manager.h"
 #include <iostream>
 #include <../vendor/entt.h>
+#include <entt/components/mesh_renderer.h>
 
 struct position {
     float x;
@@ -20,7 +21,12 @@ void entt_manager::init()
     for(auto i = 0u; i < 10u; ++i) {
         const auto entity = registry.create();
         registry.emplace<position>(entity, i * 1.f, i * 1.f);
-        if(i % 2 == 0) { registry.emplace<velocity>(entity, i * .1f, i * .1f); }
+        if(i % 2 == 0) { 
+            registry.emplace<velocity>(entity, i * .1f, i * .1f); 
+        }
+        else {
+            registry.emplace<MeshRenderer>(entity, i * .1f, i * .1f); 
+        }
     }
 
     update(registry);
