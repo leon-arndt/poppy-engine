@@ -48,8 +48,8 @@ file(
     src/transform.h
     src/transform.cpp
     src/entt/entt_manager.cpp
-    src/entt/components/mesh_renderer.cpp
-    src/entt/components/mesh_renderer.h
+    src/entt/components/comp_mesh_render.cpp
+    src/entt/components/comp_mesh_render.h
     src/renderer/model.cpp
     src/renderer/hardware_resources.cpp
     src/renderer/resource_manager.cpp

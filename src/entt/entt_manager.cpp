@@ -1,7 +1,7 @@
 #include "entt_manager.h"
 #include <iostream>
 #include <../vendor/entt.h>
-#include <entt/components/mesh_renderer.h>
+#include <entt/components/comp_mesh_render.h>
 
 struct position {
     float x;
@@ -25,7 +25,7 @@ void entt_manager::init()
             registry.emplace<velocity>(entity, i * .1f, i * .1f); 
         }
         else {
-            registry.emplace<MeshRenderer>(entity, i * .1f, i * .1f); 
+            registry.emplace<MeshRenderComponent>(entity); 
         }
     }
 
