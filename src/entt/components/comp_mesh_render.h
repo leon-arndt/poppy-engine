@@ -3,6 +3,5 @@
 #include <memory>
 
 struct MeshRenderComponent {
-    //std::shared_ptr<model::Model> modelData;
-    int schmint;
+    std::shared_ptr<model::Model> modelData;
 };
