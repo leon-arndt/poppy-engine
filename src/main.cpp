@@ -11,7 +11,7 @@
 #include "../glad/glad.h"
 #include "util/error.h"
 #include "entt/entt_manager.h"
-
+#include "renderer/renderer.h"
 
 int main(int argc, char *argv[])
 {
@@ -43,10 +43,9 @@ int main(int argc, char *argv[])
                           &unusedIds,
                           true);
 
-
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
+    ImGuiIO &io = ImGui::GetIO();
     ImGui::GetIO().Fonts->AddFontDefault();
     ImGui::GetIO().Fonts->Build();
 
@@ -73,6 +72,7 @@ int main(int argc, char *argv[])
         ImGui::NewFrame();
 
         //draw geometry here
+        renderer::render(entt_manager::get_registry());
 
         // render your GUI
         ImGui::Begin("imGUi window");

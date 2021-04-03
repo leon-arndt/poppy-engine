@@ -11,16 +11,6 @@ set(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(SOURCES 
     ${SRC_DIR})
 
-file(GLOB sources
-src/main.cpp
-vendor/entt.h
-src/transform.h
-src/transform.cpp
-src/renderer/model.cpp
-src/renderer/hardware_resources.cpp
-src/renderer/resource_manager.cpp
-glad/glad.h
-glad/glad.c)
 set(ImGuiSources
         main.cpp
         imgui/imconfig.h
@@ -47,12 +37,13 @@ file(
     imgui/examples/imgui_impl_glfw.cpp
     src/transform.h
     src/transform.cpp
-    src/entt/entt_manager.cpp
-    src/entt/components/comp_mesh_render.cpp
-    src/entt/components/comp_mesh_render.h
-    src/renderer/model.cpp
-    src/renderer/hardware_resources.cpp
-    src/renderer/resource_manager.cpp
+    src/entt/*.h
+    src/entt/*.cpp
+    src/entt/components/*.cpp
+    src/entt/components/*.h
+    src
+    src/renderer/*.cpp
+    src/renderer/*.h
         imgui/glad/glad.h
         imgui/glad/glad.c
     ${ImGuiSources}
