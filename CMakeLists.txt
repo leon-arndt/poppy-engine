@@ -35,8 +35,6 @@ file(
     vendor/entt.h
     imgui/examples/imgui_impl_opengl3.cpp
     imgui/examples/imgui_impl_glfw.cpp
-    src/transform.h
-    src/transform.cpp
     src/entt/*.h
     src/entt/*.cpp
     src/entt/components/*.cpp
