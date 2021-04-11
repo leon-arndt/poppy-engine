@@ -1,5 +1,5 @@
 # poppy-engine
-A C++ 3D engine
+A 3D C++ game engine
 
 ## Dependencies
 - GLFW
