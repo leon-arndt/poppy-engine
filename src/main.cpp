@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    auto window = glfwCreateWindow(320, 240, "glfw Window", nullptr, nullptr);
+    auto window = glfwCreateWindow(480, 360, "glfw Window", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     glfwSetWindowCloseCallback(window, [](GLFWwindow *window) { glfwSetWindowShouldClose(window, 1); });
     if (!gladLoadGL())
@@ -52,8 +52,8 @@ int main(int argc, char *argv[])
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
     ImVec2 vec;
-    vec.x = 160;
-    vec.y = 90;
+    vec.x = 240;
+    vec.y = 120;
     io.DisplaySize = vec;
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -75,8 +75,14 @@ int main(int argc, char *argv[])
         renderer::render(entt_manager::get_registry());
 
         // render your GUI
-        ImGui::Begin("imGUi window");
-        ImGui::Button("Hello Lukas!");
+
+        ImGui::Begin("Inspector");
+        static float testFloat3[4] = { 0.10f, 0.20f, 0.30f, 0.42f };
+        ImGui::InputFloat3("translation", testFloat3);
+        ImGui::InputFloat3("rotation", testFloat3);
+        ImGui::InputFloat3("scale", testFloat3);
+        ImGui::InputFloat3("skew", testFloat3);
+        ImGui::Button("Reset Transform");
         ImGui::End();
 
         // Render dear imgui into screen
