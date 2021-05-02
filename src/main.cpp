@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    auto window = glfwCreateWindow(480, 360, "glfw Window", nullptr, nullptr);
+    auto window = glfwCreateWindow(640, 480,"Poppy Engine", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     glfwSetWindowCloseCallback(window, [](GLFWwindow *window) { glfwSetWindowShouldClose(window, 1); });
     if (!gladLoadGL())
@@ -83,6 +83,14 @@ int main(int argc, char *argv[])
         ImGui::InputFloat3("scale", testFloat3);
         ImGui::InputFloat3("skew", testFloat3);
         ImGui::Button("Reset Transform");
+        ImGui::End();
+
+        ImGui::Begin("Hierarchy");
+                const char* listbox_items[] = { "Apple", "Banana", "Cherry", "Kiwi", "Mango", "Orange", "Pineapple", "Strawberry", "Watermelon" };
+static int listbox_item_current = -1, listbox_item_current2 = -1;
+        ImGui::PushItemWidth(-1);
+        ImGui::ListBox("##listbox2", &listbox_item_current2, listbox_items, IM_ARRAYSIZE(listbox_items), 12);
+        ImGui::PopItemWidth();
         ImGui::End();
 
         // Render dear imgui into screen
