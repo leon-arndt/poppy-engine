@@ -5,8 +5,27 @@
 #include <vector>
 #include <GLFW/glfw3.h>
 #include <GL/gl.h>
+#include <glm/glm.hpp>
 
 #include "../types.h"
+
+struct tmp_buffer_data
+{
+    std::vector<vertex> vertices;
+    std::vector<GLuint> vertex_indices;
+
+    std::vector<glm::vec3> normals;
+
+    std::vector<glm::vec2> tex_coords;
+
+    void clear()
+    {
+        vertices.clear();
+        vertex_indices.clear();
+        normals.clear();
+        tex_coords.clear();
+    }
+};
 
 /*******************************************************\
 * Immutable hardware buffers                            *
@@ -18,6 +37,6 @@ struct hardware_buffer
     GLuint vao;
     size_t size{0};
 
-    hardware_buffer(const std::vector<vertex> &vertices, const std::vector<GLuint> &indices);
+    hardware_buffer(const tmp_buffer_data &data);
     ~hardware_buffer();
 };
