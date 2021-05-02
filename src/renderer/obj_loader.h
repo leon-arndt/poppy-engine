@@ -1,10 +1,13 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include <GL/gl.h>
 
-#include "model.h"
+#include "types.h"
+#include "hardware_resources.h"
 
 namespace obj_loader
 {
-    model::Model load(std::string path);
+    tmp_buffer_data load(const std::string &path, bool normalize = false);
 }
