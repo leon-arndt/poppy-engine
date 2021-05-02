@@ -13,6 +13,11 @@ namespace error
                                          const void *userParam)
     {
 
+        static GLuint prev_id = 0;
+        if (prev_id == id)
+            return;
+        prev_id = id;
+
         std::cout << "---------------------opengl-callback-start------------" << std::endl;
         std::cout << "message: " << message << std::endl;
         std::cout << "type: ";
