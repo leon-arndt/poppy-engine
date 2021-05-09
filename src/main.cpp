@@ -3,14 +3,11 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include <unistd.h>
-#include <imgui.h>
-#include <examples/imgui_impl_glfw.h>
-#include <examples/imgui_impl_opengl3.h>
-
 #include "../vendor/entt.h"
 #include "../glad/glad.h"
 #include "util/error.h"
 #include "entt/entt_manager.h"
+#include "editor/editor.h"
 #include "renderer/renderer.h"
 
 int main(int argc, char *argv[])
@@ -24,7 +21,7 @@ int main(int argc, char *argv[])
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    auto window = glfwCreateWindow(640, 480,"Poppy Engine", nullptr, nullptr);
+    auto window = glfwCreateWindow(640, 480, "Poppy Engine", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     glfwSetWindowCloseCallback(window, [](GLFWwindow *window) { glfwSetWindowShouldClose(window, 1); });
     if (!gladLoadGL())
@@ -43,21 +40,12 @@ int main(int argc, char *argv[])
                           &unusedIds,
                           true);
 
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO &io = ImGui::GetIO();
-    ImGui::GetIO().Fonts->AddFontDefault();
-    ImGui::GetIO().Fonts->Build();
+    editor::init();
 
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
-    ImVec2 vec;
-    vec.x = 240;
-    vec.y = 120;
-    io.DisplaySize = vec;
 
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 130");
+    editor::init2(window);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -67,35 +55,12 @@ int main(int argc, char *argv[])
         glClear(GL_COLOR_BUFFER_BIT);
 
         // feed inputs to dear imgui, start new frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        editor::clear();
 
         //draw geometry here
         renderer::render(entt_manager::get_registry());
-
-        // render your GUI
-
-        ImGui::Begin("Inspector");
-        static float testFloat3[4] = { 0.10f, 0.20f, 0.30f, 0.42f };
-        ImGui::InputFloat3("translation", testFloat3);
-        ImGui::InputFloat3("rotation", testFloat3);
-        ImGui::InputFloat3("scale", testFloat3);
-        ImGui::InputFloat3("skew", testFloat3);
-        ImGui::Button("Reset Transform");
-        ImGui::End();
-
-        ImGui::Begin("Hierarchy");
-                const char* listbox_items[] = { "Apple", "Banana", "Cherry", "Kiwi", "Mango", "Orange", "Pineapple", "Strawberry", "Watermelon" };
-static int listbox_item_current = -1, listbox_item_current2 = -1;
-        ImGui::PushItemWidth(-1);
-        ImGui::ListBox("##listbox2", &listbox_item_current2, listbox_items, IM_ARRAYSIZE(listbox_items), 12);
-        ImGui::PopItemWidth();
-        ImGui::End();
-
-        // Render dear imgui into screen
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        editor::scaffold();
+        editor::render();
 
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
@@ -104,7 +69,7 @@ static int listbox_item_current = -1, listbox_item_current2 = -1;
     }
 
     //clean up
-    ImGui::DestroyContext();
+    editor::destroy();
     glfwDestroyWindow(window);
 
     return 0;

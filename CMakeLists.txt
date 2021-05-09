@@ -39,6 +39,8 @@ file(
     src/entt/*.cpp
     src/entt/components/*.cpp
     src/entt/components/*.h
+    src/editor/*.cpp
+    src/editor/*.h
     src
     src/renderer/*.cpp
     src/renderer/*.h
