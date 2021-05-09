@@ -40,12 +40,10 @@ int main(int argc, char *argv[])
                           &unusedIds,
                           true);
 
-    editor::init();
+    editor::init(window);
 
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
-
-    editor::init2(window);
 
     while (!glfwWindowShouldClose(window))
     {

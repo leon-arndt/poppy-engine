@@ -3,7 +3,7 @@
 #include <examples/imgui_impl_glfw.h>
 #include <examples/imgui_impl_opengl3.h>
 
-void editor::init()
+void editor::init(GLFWwindow* window)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -15,10 +15,7 @@ void editor::init()
     vec.x = 240;
     vec.y = 120;
     io.DisplaySize = vec;
-}
 
-void editor::init2(GLFWwindow* window)
-{
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 }

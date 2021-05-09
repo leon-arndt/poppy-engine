@@ -3,8 +3,7 @@
 class editor
 {
 public:
-    static void init();
-    static void init2(GLFWwindow* window);
+    static void init(GLFWwindow* window);
     static void scaffold();
     static void render();
     static void clear();
