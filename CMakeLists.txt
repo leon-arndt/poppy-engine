@@ -1,34 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CPP_COMPILER clang)
 set(CMAKE_CXX_STANDARD 17)
-
-set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-
-execute_process (
-    COMMAND "cmake -S glfw -B meinbuild"
-)
-
-include(ExternalProject)
-ExternalProject_Add(glfw
-    URL glfw
-    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/glfw
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=pobama
-  )
-  
-  include_directories(${CMAKE_CURRENT_BINARY_DIR}/glfw/)
-  
-  ExternalProject_Get_Property(project_a install_dir)
-  include_directories(${install_dir}/include)
-  
-  add_dependencies(project_b_exe project_a)
-  target_link_libraries(project_b_exe ${install_dir}/lib/alib.lib)
-
-list(APPEND CMAKE_PREFIX_PATH "./glfw/src/")
-
 project(poppy-engine)
+
 project(${PROJECT_NAME} VERSION 1.0)
 
 
+set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(SOURCES 
     ${SRC_DIR})
