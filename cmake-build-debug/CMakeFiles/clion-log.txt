@@ -1,24 +1,20 @@
-/snap/clion/139/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/leon/CLionProjects/poppy-engine
-CMake Warning (dev) at /var/lib/snapd/snap/clion/139/bin/cmake/linux/share/cmake-3.17/Modules/FindOpenGL.cmake:305 (message):
-  Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when
-  available.  Run "cmake --help-policy CMP0072" for policy details.  Use the
-  cmake_policy command to set the policy and suppress this warning.
+/app/extra/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /home/thomas/Documents/GitHub/poppy-engine
+CMake Error at CMakeLists.txt:63 (find_package):
+  By not providing "Findglfw3.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "glfw3", but
+  CMake did not find one.
 
-  FindOpenGL found both a legacy GL library:
+  Could not find a package configuration file provided by "glfw3" (requested
+  version 3.2) with any of the following names:
 
-    OPENGL_gl_LIBRARY: /usr/lib/libGL.so
+    glfw3Config.cmake
+    glfw3-config.cmake
 
-  and GLVND libraries for OpenGL and GLX:
+  Add the installation prefix of "glfw3" to CMAKE_PREFIX_PATH or set
+  "glfw3_DIR" to a directory containing one of the above files.  If "glfw3"
+  provides a separate development package or SDK, be sure it has been
+  installed.
 
-    OPENGL_opengl_LIBRARY: /usr/lib/libOpenGL.so
-    OPENGL_glx_LIBRARY: /usr/lib/libGLX.so
 
-  OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for
-  compatibility with CMake 3.10 and below the legacy GL library will be used.
-Call Stack (most recent call first):
-  CMakeLists.txt:32 (find_package)
-This warning is for project developers.  Use -Wno-dev to suppress it.
-
--- Configuring done
--- Generating done
--- Build files have been written to: /home/leon/CLionProjects/poppy-engine/cmake-build-debug
+-- Configuring incomplete, errors occurred!
+See also "/home/thomas/Documents/GitHub/poppy-engine/cmake-build-debug/CMakeFiles/CMakeOutput.log".
