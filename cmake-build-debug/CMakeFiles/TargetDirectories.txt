@@ -1,3 +1,0 @@
-/home/leon/CLionProjects/poppy-engine/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/leon/CLionProjects/poppy-engine/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/leon/CLionProjects/poppy-engine/cmake-build-debug/CMakeFiles/poppy-engine.dir
