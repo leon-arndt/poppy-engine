@@ -4,12 +4,7 @@
 
 #include <vector>
 #include <GLFW/glfw3.h>
-#include <OpenGL/gl.h>
-
-#ifdef __APPLE__
-#include <OpenGL/gl3.h>
-#include <OpenGL/gl3ext.h>
-#endif
+#include "opengl.h"
 
 #include <glm/glm.hpp>
 

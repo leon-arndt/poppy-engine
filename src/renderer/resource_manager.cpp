@@ -1,6 +1,6 @@
 #include "resource_manager.h"
 
-#include <OpenGL/gl.h>
+#include "opengl.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>

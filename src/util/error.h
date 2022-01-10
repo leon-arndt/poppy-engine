@@ -1,4 +1,4 @@
-#include <OpenGL/gl.h>
+#include "opengl.h"
 #include <iostream>
 
 namespace error
