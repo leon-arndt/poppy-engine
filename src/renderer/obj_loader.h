@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include <GL/gl.h>
+#include <OpenGL/gl.h>
 
 #include "types.h"
 #include "hardware_resources.h"

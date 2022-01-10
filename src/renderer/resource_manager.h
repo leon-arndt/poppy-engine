@@ -2,7 +2,7 @@
 
 #define GL_GLEXT_PROTOTYPES
 
-#include <GL/gl.h>
+#include <OpenGL/gl.h>
 #include "glm/vec4.hpp"
 #include <vector>
 #include <unordered_map>
