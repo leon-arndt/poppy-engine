@@ -9,8 +9,11 @@ project(${PROJECT_NAME} VERSION 1.0)
 file(GLOB IMGUI_SOURCES
 ${CMAKE_SOURCE_DIR}/imgui/*.h
 ${CMAKE_SOURCE_DIR}/imgui/*.cpp
-${CMAKE_SOURCE_DIR}/imgui/backends/imgui_impl_glfw.*
-${CMAKE_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.*)
+${CMAKE_SOURCE_DIR}/imgui/backends/imgui_impl_glfw.h
+${CMAKE_SOURCE_DIR}/imgui/backends/imgui_impl_glfw.cpp
+${CMAKE_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.h
+${CMAKE_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.cpp
+)
 
 file(GLOB_RECURSE SOURCE_FILES
     ${CMAKE_SOURCE_DIR}/src/*.cpp

@@ -8,7 +8,6 @@
 #include <backends/imgui_impl_opengl3.h>
 
 #include "../vendor/entt.h"
-#include "../glad/glad.h"
 #include "util/error.h"
 #include "entt/entt_manager.h"
 #include "renderer/renderer.h"

@@ -105,7 +105,7 @@ namespace obj_loader
                 else if (type == "vn")
                 {
                     float x, y, z;
-                    iss >> x, y, z;
+                    iss >> x >> y >> z;
                     norm_unordered.emplace_back(glm::vec3{x, y, z});
                 }
                 else if (type == "f")

@@ -1,5 +1,5 @@
 #pragma once
-
+#define GLFW_INCLUDE_NONE
 #define GL_GLEXT_PROTOTYPES
 
 #include <vector>
